@@ -1,0 +1,12 @@
+# Ignorovat složky generované buildem
+/target/
+/out/
+*.class
+
+# Nastavení IDE
+.idea/
+*.iml
+
+# Systémové soubory
+.DS_Store
+Thumbs.db
