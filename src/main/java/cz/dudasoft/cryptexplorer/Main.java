@@ -1,16 +1,12 @@
 package cz.dudasoft.cryptexplorer;
 
+import cz.dudasoft.cryptexplorer.dungeon.MapGenerator;
+
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        char[][] dungeon = {
-                {'S', '.', '#', '#', '#'},
-                {'#', '.', '#', 'T', '#'},
-                {'#', '.', '.', '.', 'M'},
-                {'#', '#', '#', '.', '#'},
-                {'#', '#', '#', '.', 'E'}
-        };
+        char[][] dungeon = MapGenerator.generateMap(10, 10);
 
         int playerX = 0, playerY = 0;
         Map<Character, String> roomDescriptions = Map.of(

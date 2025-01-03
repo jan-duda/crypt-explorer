@@ -3,6 +3,10 @@
 /out/
 *.class
 
+# Gradle build files
+.gradle/
+build/
+
 # Nastavení IDE
 .idea/
 *.iml
@@ -10,3 +14,6 @@
 # Systémové soubory
 .DS_Store
 Thumbs.db
+
+# Logy a dočasné soubory
+*.log
