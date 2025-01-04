@@ -39,6 +39,24 @@ public class MapGeneratorTest {
         assertTrue(MapGenerator.isPathNavigable(map), "There should be a path from 'S' to 'E'.");
     }
 
+    @Test
+    public void testMapIsSurroundedByWalls() {
+        int rows = 5;
+        int cols = 5;
+        char[][] map = MapGenerator.generateMap(rows, cols);
+
+        // Check top and bottom rows
+        for (int col = 0; col < cols; col++) {
+            assertEquals('#', map[0][col], "Top row should be surrounded by walls.");
+            assertEquals('#', map[rows - 1][col], "Bottom row should be surrounded by walls.");
+        }
+
+        // Check left and right columns
+        for (int row = 0; row < rows; row++) {
+            assertEquals('#', map[row][0], "Left column should be surrounded by walls.");
+            assertEquals('#', map[row][cols - 1], "Right column should be surrounded by walls.");
+        }
+    }
 
 }
 

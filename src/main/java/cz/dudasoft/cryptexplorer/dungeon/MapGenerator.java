@@ -17,8 +17,8 @@ public class MapGenerator {
         }
 
         // Place start and exit
-        map[0][0] = 'S';
-        map[rows - 1][cols - 1] = 'E';
+        map[1][1] = 'S';
+        map[rows - 2][cols - 2] = 'E';
 
         do {
             createRandomPaths(rows, cols, random, map);
@@ -41,7 +41,7 @@ public class MapGenerator {
         for (int i = 0; i < rows * cols / 3; i++) {
             int x = random.nextInt(rows);
             int y = random.nextInt(cols);
-            if (map[x][y] == '#') {
+            if (map[x][y] == '#' && x != 0 && x != rows - 1 && y != 0 && y != cols - 1) {
                 map[x][y] = '.';
             }
         }

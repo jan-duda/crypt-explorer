@@ -6,9 +6,9 @@ import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        char[][] dungeon = MapGenerator.generateMap(10, 10);
+        char[][] dungeon = MapGenerator.generateMap(10, 120);
 
-        int playerX = 0, playerY = 0;
+        int playerX = 1, playerY = 1;
         Map<Character, String> roomDescriptions = Map.of(
                 'S', "You stand at the dungeon entrance.",
                 'T', "You see a pile of glittering treasure.",
