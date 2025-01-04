@@ -5,11 +5,13 @@ import org.junit.jupiter.api.Test;
 
 public class MapGeneratorTest {
 
+    MapGenerator mapGenerator = new MapGenerator();
+
     @Test
     public void testGenerateMapDimensions() {
         int rows = 5;
         int cols = 5;
-        char[][] map = MapGenerator.generateMap(rows, cols);
+        char[][] map = mapGenerator.generateMap(rows, cols);
         assertEquals(rows, map.length, "Map should have the correct number of rows.");
         for (char[] row : map) {
             assertEquals(cols, row.length, "Map should have the correct number of columns.");
@@ -18,7 +20,7 @@ public class MapGeneratorTest {
 
     @Test
     public void testMapHasStartAndExit() {
-        char[][] map = MapGenerator.generateMap(5, 5);
+        char[][] map = mapGenerator.generateMap(5, 5);
         int startCount = 0;
         int exitCount = 0;
 
@@ -35,15 +37,15 @@ public class MapGeneratorTest {
 
     @Test
     public void testMapHasNavigablePath() {
-        char[][] map = MapGenerator.generateMap(5, 5);
-        assertTrue(MapGenerator.isPathNavigable(map), "There should be a path from 'S' to 'E'.");
+        char[][] map = mapGenerator.generateMap(5, 5);
+        assertTrue(mapGenerator.isPathNavigable(map), "There should be a path from 'S' to 'E'.");
     }
 
     @Test
     public void testMapIsSurroundedByWalls() {
         int rows = 5;
         int cols = 5;
-        char[][] map = MapGenerator.generateMap(rows, cols);
+        char[][] map = mapGenerator.generateMap(rows, cols);
 
         // Check top and bottom rows
         for (int col = 0; col < cols; col++) {

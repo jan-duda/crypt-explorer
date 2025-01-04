@@ -5,7 +5,7 @@ import java.util.Queue;
 import java.util.Random;
 
 public class MapGenerator {
-    public static char[][] generateMap(int rows, int cols) {
+    public char[][] generateMap(int rows, int cols) {
         Random random = new Random();
         char[][] map = new char[rows][cols];
 
@@ -36,7 +36,7 @@ public class MapGenerator {
         return map;
     }
 
-    private static void createRandomPaths(int rows, int cols, Random random, char[][] map) {
+    private void createRandomPaths(int rows, int cols, Random random, char[][] map) {
         // Create some random paths
         for (int i = 0; i < rows * cols / 3; i++) {
             int x = random.nextInt(rows);
@@ -47,7 +47,7 @@ public class MapGenerator {
         }
     }
 
-    public static boolean isPathNavigable(char[][] map) {
+    public boolean isPathNavigable(char[][] map) {
         int rows = map.length;
         int cols = map[0].length;
 
@@ -83,7 +83,19 @@ public class MapGenerator {
                 }
             }
         }
-
         return false;
+    }
+
+    public void displayMap(char[][] map, int playerX, int playerY) {
+        for (int i = 0; i < map.length; i++) {
+            for (int j = 0; j < map[i].length; j++) {
+                if (i == playerX && j == playerY) {
+                    System.out.print('P'); // Player position
+                } else {
+                    System.out.print(map[i][j]);
+                }
+            }
+            System.out.println();
+        }
     }
 }

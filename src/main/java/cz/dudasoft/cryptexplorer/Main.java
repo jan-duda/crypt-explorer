@@ -1,12 +1,17 @@
 package cz.dudasoft.cryptexplorer;
 
 import cz.dudasoft.cryptexplorer.dungeon.MapGenerator;
+import cz.dudasoft.cryptexplorer.gameplay.MovementHandler;
 
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        char[][] dungeon = MapGenerator.generateMap(10, 120);
+
+        MapGenerator mapGenerator = new MapGenerator();
+        MovementHandler movementHandler = new MovementHandler();
+
+        char[][] dungeon = mapGenerator.generateMap(10, 120);
 
         int playerX = 1, playerY = 1;
         Map<Character, String> roomDescriptions = Map.of(
@@ -16,22 +21,13 @@ public class Main {
                 'E', "You see the dungeon's exit."
         );
 
+
         Scanner scanner = new Scanner(System.in);
         boolean gameRunning = true;
         int health = 10, score = 0;
 
         while (gameRunning) {
-            // Display the map
-            for (int i = 0; i < dungeon.length; i++) {
-                for (int j = 0; j < dungeon[i].length; j++) {
-                    if (i == playerX && j == playerY) {
-                        System.out.print('P'); // Player position
-                    } else {
-                        System.out.print(dungeon[i][j]);
-                    }
-                }
-                System.out.println();
-            }
+            mapGenerator.displayMap(dungeon, playerX, playerY);
 
             // Describe the current room
             char currentRoom = dungeon[playerX][playerY];
@@ -60,27 +56,13 @@ public class Main {
             }
 
             // Movement options
-            System.out.println("Choose a direction to move:");
-            System.out.println("1. Up  2. Down  3. Left  4. Right");
-            int move = scanner.nextInt();
-            int newX = playerX, newY = playerY;
+            System.out.println("Use numpad (1-9) to move:");
+            int input = scanner.nextInt();
+            int[] newPosition = movementHandler.getNewPosition(playerX, playerY, input, dungeon);
 
-            switch (move) {
-                case 1: newX--; break;
-                case 2: newX++; break;
-                case 3: newY--; break;
-                case 4: newY++; break;
-                default: System.out.println("Invalid move!"); continue;
-            }
-
-            // Check if the move is valid
-            if (newX >= 0 && newX < dungeon.length && newY >= 0 && newY < dungeon[0].length
-                    && dungeon[newX][newY] != '#') {
-                playerX = newX;
-                playerY = newY;
-            } else {
-                System.out.println("You hit a wall!");
-            }
+            // Update player position
+            playerX = newPosition[0];
+            playerY = newPosition[1];
 
             // Check for exit
             if (dungeon[playerX][playerY] == 'E') {
