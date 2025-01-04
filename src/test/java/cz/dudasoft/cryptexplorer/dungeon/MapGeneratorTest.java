@@ -26,8 +26,8 @@ public class MapGeneratorTest {
 
         for (char[] row : map) {
             for (char cell : row) {
-                if (cell == 'S') startCount++;
-                if (cell == 'E') exitCount++;
+                if (cell == MapFieldType.START.getSymbol()) startCount++;
+                if (cell == MapFieldType.EXIT.getSymbol()) exitCount++;
             }
         }
 
@@ -50,14 +50,14 @@ public class MapGeneratorTest {
 
         // Check top and bottom rows
         for (int col = 0; col < cols; col++) {
-            assertEquals('#', map[0][col], "Top row should be surrounded by walls.");
-            assertEquals('#', map[rows - 1][col], "Bottom row should be surrounded by walls.");
+            assertEquals(MapFieldType.WALL.getSymbol(), map[0][col], "Top row should be surrounded by walls.");
+            assertEquals(MapFieldType.WALL.getSymbol(), map[rows - 1][col], "Bottom row should be surrounded by walls.");
         }
 
         // Check left and right columns
         for (int row = 0; row < rows; row++) {
-            assertEquals('#', map[row][0], "Left column should be surrounded by walls.");
-            assertEquals('#', map[row][cols - 1], "Right column should be surrounded by walls.");
+            assertEquals(MapFieldType.WALL.getSymbol(), map[row][0], "Left column should be surrounded by walls.");
+            assertEquals(MapFieldType.WALL.getSymbol(), map[row][cols - 1], "Right column should be surrounded by walls.");
         }
     }
 

@@ -12,13 +12,13 @@ public class MapGenerator {
         // Fill map with walls
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                map[i][j] = '#';
+                map[i][j] = MapFieldType.WALL.getSymbol();
             }
         }
 
         // Place start and exit
-        map[1][1] = 'S';
-        map[rows - 2][cols - 2] = 'E';
+        map[1][1] = MapFieldType.START.getSymbol();
+        map[rows - 2][cols - 2] = MapFieldType.EXIT.getSymbol();
 
         do {
             createRandomPaths(rows, cols, random, map);
@@ -28,8 +28,8 @@ public class MapGenerator {
         for (int i = 0; i < rows * cols / 10; i++) {
             int x = random.nextInt(rows);
             int y = random.nextInt(cols);
-            if (map[x][y] == '.') {
-                map[x][y] = random.nextBoolean() ? 'T' : 'M';
+            if (map[x][y] == MapFieldType.EMPTY.getSymbol()) {
+                map[x][y] = random.nextBoolean() ? MapFieldType.TREASURE.getSymbol() : MapFieldType.MONSTER.getSymbol();
             }
         }
 
@@ -41,8 +41,8 @@ public class MapGenerator {
         for (int i = 0; i < rows * cols / 3; i++) {
             int x = random.nextInt(rows);
             int y = random.nextInt(cols);
-            if (map[x][y] == '#' && x != 0 && x != rows - 1 && y != 0 && y != cols - 1) {
-                map[x][y] = '.';
+            if (map[x][y] == MapFieldType.WALL.getSymbol() && x != 0 && x != rows - 1 && y != 0 && y != cols - 1) {
+                map[x][y] = MapFieldType.EMPTY.getSymbol();
             }
         }
     }
@@ -57,7 +57,7 @@ public class MapGenerator {
         // Find the start position
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if (map[i][j] == 'S') {
+                if (map[i][j] == MapFieldType.START.getSymbol()) {
                     queue.add(new int[]{i, j});
                     visited[i][j] = true;
                     break;
@@ -65,23 +65,23 @@ public class MapGenerator {
             }
         }
 
-        // BFS to check for path to 'E'
+        // check for path to 'E'
         int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}};
         while (!queue.isEmpty()) {
             int[] current = queue.poll();
             int x = current[0], y = current[1];
 
-            if (map[x][y] == 'E') return true;
+            if (map[x][y] == MapFieldType.EXIT.getSymbol()) return true;
 
             for (int[] dir : directions) {
                 int newX = x + dir[0];
                 int newY = y + dir[1];
                 if (newX >= 0 && newX < rows && newY >= 0 && newY < cols &&
                         !visited[newX][newY] &&
-                        (map[newX][newY] == '.'
-                                || map[newX][newY] == 'T'
-                                || map[newX][newY] == 'M'
-                                || map[newX][newY] == 'E'
+                        (map[newX][newY] == MapFieldType.EMPTY.getSymbol()
+                                || map[newX][newY] == MapFieldType.TREASURE.getSymbol()
+                                || map[newX][newY] == MapFieldType.MONSTER.getSymbol()
+                                || map[newX][newY] == MapFieldType.EXIT.getSymbol()
                         )
                 ) {
                     queue.add(new int[]{newX, newY});
@@ -96,7 +96,7 @@ public class MapGenerator {
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
                 if (i == playerX && j == playerY) {
-                    System.out.print('@'); // Player position
+                    System.out.print(MapFieldType.PLAYER.getSymbol()); // Player position
                 } else {
                     System.out.print(map[i][j]);
                 }
