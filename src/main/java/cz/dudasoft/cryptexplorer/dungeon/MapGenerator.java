@@ -77,7 +77,13 @@ public class MapGenerator {
                 int newX = x + dir[0];
                 int newY = y + dir[1];
                 if (newX >= 0 && newX < rows && newY >= 0 && newY < cols &&
-                        !visited[newX][newY] && (map[newX][newY] == '.' || map[newX][newY] == 'E')) {
+                        !visited[newX][newY] &&
+                        (map[newX][newY] == '.'
+                                || map[newX][newY] == 'T'
+                                || map[newX][newY] == 'M'
+                                || map[newX][newY] == 'E'
+                        )
+                ) {
                     queue.add(new int[]{newX, newY});
                     visited[newX][newY] = true;
                 }
@@ -90,10 +96,19 @@ public class MapGenerator {
         for (int i = 0; i < map.length; i++) {
             for (int j = 0; j < map[i].length; j++) {
                 if (i == playerX && j == playerY) {
-                    System.out.print('P'); // Player position
+                    System.out.print('@'); // Player position
                 } else {
                     System.out.print(map[i][j]);
                 }
+            }
+            System.out.println();
+        }
+    }
+
+    public void displayMap(char[][] map) {
+        for (char[] row : map) {
+            for (char col : row) {
+                System.out.print(col);
             }
             System.out.println();
         }

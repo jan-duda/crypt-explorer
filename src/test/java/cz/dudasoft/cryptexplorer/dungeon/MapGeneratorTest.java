@@ -38,6 +38,7 @@ public class MapGeneratorTest {
     @Test
     public void testMapHasNavigablePath() {
         char[][] map = mapGenerator.generateMap(5, 5);
+        mapGenerator.displayMap(map);
         assertTrue(mapGenerator.isPathNavigable(map), "There should be a path from 'S' to 'E'.");
     }
 
