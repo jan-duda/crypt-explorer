@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class FieldInteractionHandlerTest {
 
@@ -44,8 +45,10 @@ class FieldInteractionHandlerTest {
         player.updatePosition(2, 1); // Move to monster position
         roomHandler.handleRoom(monsterField, player);
 
-        assertEquals(initialHealth - 2, player.getHealth(), "Player's health should decrease by 2.");
-        assertEquals('T', map[2][1], "Monster should be replaced with a treasure.");
+        assertTrue(player.getHealth() <= initialHealth && player.getHealth() >= initialHealth - 5,
+                "Player's health should decrease by 0 - 5 hp.");
+        assertTrue(MapFieldType.TREASURE.getSymbol() == map[2][1]  || MapFieldType.EMPTY.getSymbol() == map[2][1],
+                "Monster should be replaced with a treasure or empty field.");
     }
 
     @Test

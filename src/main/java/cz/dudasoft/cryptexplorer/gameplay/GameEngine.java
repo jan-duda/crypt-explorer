@@ -38,6 +38,7 @@ public class GameEngine {
             if (player.getHealth() <= 0) {
                 System.out.println("You have perished in the dungeon. Game over.");
                 gameRunning = false;
+                scanner.close();
                 continue;
             }
 
@@ -45,6 +46,7 @@ public class GameEngine {
                 System.out.println("You found the exit! You win!");
                 System.out.println("Final score: " + player.getScore());
                 gameRunning = false;
+                scanner.close();
                 continue;
             }
 
