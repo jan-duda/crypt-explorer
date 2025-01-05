@@ -6,7 +6,7 @@ public class MovementHandler {
             {1, 0},   // 2: Down
             {1, 1},   // 3: Down-Right
             {0, -1},  // 4: Left
-            {0, 0},   // 5: Stay (optional)
+            {0, 0},   // 5: Stay (re-enter)
             {0, 1},   // 6: Right
             {-1, -1}, // 7: Top-Left
             {-1, 0},  // 8: Up
@@ -14,7 +14,7 @@ public class MovementHandler {
     };
 
     public int[] getNewPosition(int currentRow, int currentCol, int input, char[][] map) {
-        if (input < 1 || input > 9 || input == 5) {
+        if (input < 1 || input > 9) {
             throw new IllegalArgumentException("Invalid numpad input.");
         }
 
