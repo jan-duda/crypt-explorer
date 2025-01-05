@@ -6,15 +6,15 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class RoomInteractionHandlerTest {
+class FieldInteractionHandlerTest {
 
-    private RoomInteractionHandler roomHandler;
+    private FieldInteractionHandler roomHandler;
     private PlayerStats player;
     private char[][] map;
 
     @BeforeEach
     void setUp() {
-        roomHandler = new RoomInteractionHandler();
+        roomHandler = new FieldInteractionHandler();
         player = new PlayerStats();
         map = new char[][]{
                 {'.', '.', '.'},

@@ -2,7 +2,7 @@ package cz.dudasoft.cryptexplorer.dungeon;
 
 import cz.dudasoft.cryptexplorer.character.PlayerStats;
 
-public class RoomInteractionHandler {
+public class FieldInteractionHandler {
     private char[][] map;
 
     public void setMap(char[][] map) {
