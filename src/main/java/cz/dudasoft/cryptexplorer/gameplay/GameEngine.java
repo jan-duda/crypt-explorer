@@ -20,7 +20,8 @@ public class GameEngine {
     }
 
     public void startGame() {
-        char[][] dungeon = mapGenerator.generateMap(10, 120);
+        char[][] dungeon = mapGenerator.generateMap(10, 10);
+        roomHandler.setMap(dungeon);
         Scanner scanner = new Scanner(System.in);
 
         boolean gameRunning = true;

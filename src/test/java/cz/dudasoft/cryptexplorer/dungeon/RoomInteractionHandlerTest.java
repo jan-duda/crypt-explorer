@@ -10,11 +10,19 @@ class RoomInteractionHandlerTest {
 
     private RoomInteractionHandler roomHandler;
     private PlayerStats player;
+    private char[][] map;
 
     @BeforeEach
     void setUp() {
         roomHandler = new RoomInteractionHandler();
         player = new PlayerStats();
+        map = new char[][]{
+                {'.', '.', '.'},
+                {'.', 'T', '.'},
+                {'.', 'M', '.'}
+        };
+        roomHandler.setMap(map);
+        player.updatePosition(1, 1);
     }
 
     @Test
@@ -25,6 +33,7 @@ class RoomInteractionHandlerTest {
         roomHandler.handleRoom(treasureField, player);
 
         assertEquals(initialScore + 10, player.getScore(), "Player's score should increase by 10.");
+        assertEquals('.', map[1][1], "Treasure should be replaced with an empty field.");
     }
 
     @Test
@@ -32,9 +41,11 @@ class RoomInteractionHandlerTest {
         char monsterField = MapFieldType.MONSTER.getSymbol();
         int initialHealth = player.getHealth();
 
+        player.updatePosition(2, 1); // Move to monster position
         roomHandler.handleRoom(monsterField, player);
 
         assertEquals(initialHealth - 2, player.getHealth(), "Player's health should decrease by 2.");
+        assertEquals('T', map[2][1], "Monster should be replaced with a treasure.");
     }
 
     @Test
