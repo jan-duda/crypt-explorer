@@ -30,7 +30,7 @@ public class GameEngine {
 
             // Room description and interaction
             char currentRoom = dungeon[player.getX()][player.getY()];
-            roomHandler.handleRoom(currentRoom, player, scanner);
+            roomHandler.handleRoom(currentRoom, player);
 
             // Check game state
             if (player.getHealth() <= 0) {
