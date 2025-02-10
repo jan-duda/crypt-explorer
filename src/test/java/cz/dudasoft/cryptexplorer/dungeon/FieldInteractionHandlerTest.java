@@ -1,6 +1,6 @@
 package cz.dudasoft.cryptexplorer.dungeon;
 
-import cz.dudasoft.cryptexplorer.character.PlayerStats;
+import cz.dudasoft.cryptexplorer.character.Hero;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,13 +10,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class FieldInteractionHandlerTest {
 
     private FieldInteractionHandler roomHandler;
-    private PlayerStats player;
+    private Hero player;
     private char[][] map;
 
     @BeforeEach
     void setUp() {
         roomHandler = new FieldInteractionHandler();
-        player = new PlayerStats();
+        player = new Hero("Hero");
         map = new char[][]{
                 {'.', '.', '.'},
                 {'.', 'T', '.'},

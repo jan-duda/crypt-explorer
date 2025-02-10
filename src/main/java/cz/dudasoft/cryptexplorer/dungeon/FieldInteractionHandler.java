@@ -1,6 +1,6 @@
 package cz.dudasoft.cryptexplorer.dungeon;
 
-import cz.dudasoft.cryptexplorer.character.PlayerStats;
+import cz.dudasoft.cryptexplorer.character.Hero;
 
 import java.util.Random;
 
@@ -11,7 +11,7 @@ public class FieldInteractionHandler {
         this.map = map;
     }
 
-    public void handleRoom(char room, PlayerStats player) {
+    public void handleRoom(char room, Hero player) {
         System.out.println(MapFieldType.fromSymbol(room).getDescription());
 
         switch (MapFieldType.fromSymbol(room)) {
@@ -20,13 +20,13 @@ public class FieldInteractionHandler {
         }
     }
 
-    private void handleTreasure(PlayerStats player) {
+    private void handleTreasure(Hero player) {
         System.out.println("You collected treasure!");
         player.addScore(10);
         map[player.getX()][player.getY()] = MapFieldType.EMPTY.getSymbol();
     }
 
-    private void handleMonster(PlayerStats player) {
+    private void handleMonster(Hero player) {
         Random random = new Random();
         // Generate random damage between 0 and 5
         int damageTaken = random.nextInt(6);

@@ -1,6 +1,6 @@
 package cz.dudasoft.cryptexplorer.gameplay;
 
-import cz.dudasoft.cryptexplorer.character.PlayerStats;
+import cz.dudasoft.cryptexplorer.character.Hero;
 import cz.dudasoft.cryptexplorer.dungeon.MapFieldType;
 import cz.dudasoft.cryptexplorer.dungeon.MapGenerator;
 import cz.dudasoft.cryptexplorer.dungeon.FieldInteractionHandler;
@@ -11,13 +11,13 @@ public class GameEngine {
     private final MapGenerator mapGenerator;
     private final MovementHandler movementHandler;
     private final FieldInteractionHandler roomHandler;
-    private final PlayerStats player;
+    private final Hero player;
 
     public GameEngine() {
         this.mapGenerator = new MapGenerator();
         this.movementHandler = new MovementHandler();
         this.roomHandler = new FieldInteractionHandler();
-        this.player = new PlayerStats();
+        this.player = new Hero("Hero");
     }
 
     public void startGame() {
