@@ -17,7 +17,7 @@ public class GameEngine {
         this.mapGenerator = new MapGenerator();
         this.movementHandler = new MovementHandler();
         this.roomHandler = new FieldInteractionHandler();
-        this.player = new Hero("Hero");
+        this.player = new Hero("Hero", 10);
     }
 
     public void startGame() {

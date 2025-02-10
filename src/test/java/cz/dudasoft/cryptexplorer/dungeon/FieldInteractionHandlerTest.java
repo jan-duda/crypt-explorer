@@ -16,7 +16,7 @@ class FieldInteractionHandlerTest {
     @BeforeEach
     void setUp() {
         roomHandler = new FieldInteractionHandler();
-        player = new Hero("Hero");
+        player = new Hero("Hero", 10);
         map = new char[][]{
                 {'.', '.', '.'},
                 {'.', 'T', '.'},

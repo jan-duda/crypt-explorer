@@ -1,48 +1,32 @@
 package cz.dudasoft.cryptexplorer.character;
 
-public class Monster {
-    protected final String name;
-    protected int health;
-    protected final int attackDamage;
-    protected final int defense;
+import cz.dudasoft.cryptexplorer.item.WeaponType;
 
-    public Monster(String name, int health, int attackDamage, int defense) {
-        this.name = name;
-        this.health = health;
-        this.attackDamage = attackDamage;
-        this.defense = defense;
+import java.util.HashMap;
+import java.util.Map;
+
+public class Monster extends Character {
+    private final int baseAttackDamage;
+    private final Map<WeaponType, Integer> skills;
+
+    public Monster(String name, int health, int baseAttackDamage) {
+        super(name, health);
+        this.baseAttackDamage = baseAttackDamage;
+        this.skills = new HashMap<>();
     }
 
-    public String getName() {
-        return name;
+    public void improveSkill(WeaponType type, int amount) {
+        skills.put(type, skills.getOrDefault(type, 0) + amount);
     }
 
-    public int getHealth() {
-        return health;
+    public int getSkillBonus(WeaponType type) {
+        return skills.getOrDefault(type, 0);
     }
 
-    public int getDefense() {
-        return defense;
-    }
-
-    public void takeDamage(int damage) {
-        this.health -= damage;
-    }
-
-    public boolean isAlive() {
-        return this.health > 0;
-    }
-
-    public void attack(Hero player) {
-        if (isAlive()) {
-            player.defend(attackDamage);
-        } else {
-            System.out.println(name + " is already defeated and cannot attack.");
-        }
-    }
-
-    public void defend(int damage) {
-        int actualDamage = Math.max(0, damage - defense);
-        takeDamage(actualDamage);
+    @Override
+    public void attack(Character target) {
+        int attackPower = baseAttackDamage + getAttackPower(); // Base + equipped weapon bonus
+        target.takeDamage(attackPower);
+        System.out.println(getName() + " attacked " + target.getName() + " for " + attackPower + " damage!");
     }
 }
